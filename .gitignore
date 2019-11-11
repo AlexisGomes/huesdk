@@ -1,0 +1,4 @@
+testing/
+build/
+dist/
+huesdk.egg-info/
