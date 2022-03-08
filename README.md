@@ -1,28 +1,180 @@
-This is a python sdk to manipulate the Philips hue API
+# huesdk
 
-#installation
+Python package to control the Philips Hue lights.
 
+Make the usage of the Philips Hue API 1.0 easier with an object-oriented structure.
+
+## Installation
+
+```
 pip install huesdk
+```
 
+## Connexion
 
-HUE Documentation : https://developers.meethue.com/develop/get-started-2/
-HUE interface : https://{bridge ip address}/debug/clip.html
+To find the IP of your hue bridge, go to https://discovery.meethue.com
 
-#### Get Started
-Step 1: Find your hue bridge IP 
-https://www.meethue.com/api/nupnp
+```python
+from huesdk import Hue
+# For the first usage 
+# Press your bridge button
+# the connect method will return a username
+username = Hue.connect(bridge_ip=YOUR_BRIDGE_IP)
 
-Step 2 : use method `get_user` to create an authorized user
+# You can now create an instance of the Hus class, 
+# next you won't need to press the button
+hue = Hue(bridge_ip=YOUR_BRIDGE_IP, username=YOUR_USERNAME)
 
-### Create python package
+# Turn on all the lights
+hue.on()
 
-sudo python -m pip install --upgrade pip setuptools wheel
+# Turn off all the lights
+hue.off()
+```
 
-sudo python -m pip install tqdm
+## Lights
 
-sudo python -m pip install --user --upgrade twine
+### Get all light objects
+```python
+lights = hue.get_lights()
 
-### Build package
-python setup.py bdist_wheel
+# Print light properties
+for light in lights:
+    print(light.id_)
+    print(light.name)
+    print(light.is_on)
+    print(light.bri)
+    print(light.hue)
+    print(light.sat)
 
-python -m twine upload dist/*
+# turn on each lights
+for light in lights:
+    light.on()
+```
+
+### Get single light
+```python
+# get light with id
+light = hue.get_light(id_=1)
+
+# get light with name
+light = hue.get_light(name="Room 1")
+```
+
+### Lights methods
+```python
+lights = hue.get_lights()
+
+# turn on
+lights[0].on()
+
+# turn off
+lights[0].off()
+
+# Change color 
+# with hue, red=65535, green=21845 and blue=43690
+lights[0].set_color(hue=43690)
+
+# with hexadecimal
+lights[0].set_color(hexa="#065535")
+
+# Change brightness, from 1 to 254
+lights[0].set_brightness(254)
+
+# Change light's name
+lights[0].set_name("Hue color lamp 2")
+
+# Change saturation, from 1 to 254
+lights[0].set_saturation(254)
+```
+### Transitions
+For each change, you can set a transition time.
+This is given as a multiple of 100ms. 
+So `transition=10` will make the transition last 1 second.
+The default value is 4 (400ms).
+
+```python
+group = hue.get_group(name="kitchen")
+group.off(transition=1000)
+```
+
+## Groups
+The same methods are available for groups
+
+### Get all group objects
+```python
+groups = hue.get_groups()
+
+# Print light properties
+for group in groups:
+    print(group.id_)
+    print(group.name)
+
+# turn on each groups
+for group in groups:
+    groups.on()
+```
+
+### Get single group
+```python
+# get group with id
+group = hue.get_group(id_=1)
+
+# get group with name
+group = hue.get_group(name="kitchen")
+```
+
+### Groups methods
+```python
+groups = hue.get_groups()
+
+# turn on
+groups[0].on()
+
+# turn off
+groups[0].off()
+
+# Change brightness, from 1 to 254
+groups[0].set_brightness(value)
+
+# Change group's name
+groups[0].set_name("Hue color lamp 2")
+
+# Change saturation, from 1 to 254
+groups[0].set_saturation(value)
+```
+
+### Transitions
+Transitions are also available for groups.
+```python
+group = hue.get_group(name="kitchen")
+group.off(transition=1000)
+```
+
+## Schedules
+
+### Get all schedules objects
+```python
+schedules = hue.get_schedules()
+
+# Print schedules properties
+for schedule in schedules:
+    print(schedule.id_)
+    print(schedule.name)
+    print(schedule.description)
+    print(schedule.status)
+    print(schedule.command)
+```
+
+### Schedules methods
+```python
+schedules = hue.get_schedules()
+
+# Change name
+schedules[0].set_name("Schedules 0")
+# Change description
+schedules[0].set_description("Schedules 0")
+
+# Delete
+schedules[0].delete()
+```
