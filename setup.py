@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='huesdk',
-    version='1.0',
+    version='1.1',
     packages=setuptools.find_packages(),
     author="Gomes Alexis",
     author_email="alexis.gomes19@gmail.com",

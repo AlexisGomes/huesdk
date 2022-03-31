@@ -12,3 +12,7 @@ from .light import (
 from .schedule import (
     Schedule
 )
+
+from .discover import (
+    Discover
+)

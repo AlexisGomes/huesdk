@@ -10,9 +10,17 @@ Make the usage of the Philips Hue API 1.0 easier with an object-oriented structu
 pip install huesdk
 ```
 
-## Connexion
+## Discovery
 
-To find the IP of your hue bridge, go to https://discovery.meethue.com
+To find the IP of your hue bridge, go to https://discovery.meethue.com. Or alternatively,
+
+```python
+from huesdk import Discover
+discover = Discover()
+print(discover.find_hue_bridge())
+```
+
+## Connexion
 
 ```python
 from huesdk import Hue
