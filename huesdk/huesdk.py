@@ -1,5 +1,4 @@
 import requests
-import json
 
 from huesdk.light import Light
 from huesdk.group import Group
