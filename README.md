@@ -102,8 +102,13 @@ So `transition=10` will make the transition last 1 second.
 The default value is 4 (400ms).
 
 ```python
-group = hue.get_group(name="kitchen")
-group.off(transition=1000)
+light = hue.get_light(name="kitchen")
+
+# the light will slowly turn off in 5secs
+light.off(transition=50)
+
+# the light will be red after 10 seconds
+light.set_color(hexa="#ff0000", transition=100)
 ```
 
 ## Groups
