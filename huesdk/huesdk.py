@@ -1,5 +1,4 @@
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 from huesdk.light import Light
 from huesdk.group import Group
@@ -11,7 +10,6 @@ class Hue:
     def __init__(self, bridge_ip, username):
         self.bridge_ip = bridge_ip
         self.username = username
-        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
     @staticmethod
     def connect(bridge_ip):
