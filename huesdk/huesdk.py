@@ -1,4 +1,9 @@
 import requests
+from urllib3.exceptions import InsecureRequestWarning
+
+# Suppress only the single warning from urllib3 needed.
+# otherwise verify=True results in a certificate verify failure due to a self signed certificate
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
 from huesdk.light import Light
 from huesdk.group import Group
