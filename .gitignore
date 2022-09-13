@@ -2,3 +2,5 @@ testing/
 build/
 dist/
 huesdk.egg-info/
+.DS_Store
+.idea/
