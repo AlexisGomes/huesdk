@@ -20,6 +20,16 @@ discover = Discover()
 print(discover.find_hue_bridge())
 ```
 
+Since https://discovery.meethue.com and ```discover.find_hue_bridge()``` are rate limited
+and require an internet connection, you can also search for bridges locally using mDNS:
+
+```python
+from huesdk import Discover
+discover = Discover()
+print(discover.find_hue_bridge_mdns(timeout=5))
+```
+
+
 ## Connexion
 
 ```python
