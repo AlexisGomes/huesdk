@@ -14,7 +14,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/AlexisGomes/huesdk",
     install_requires=[
-        "requests"
+        "requests",
+        "zeroconf"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
