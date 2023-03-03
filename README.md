@@ -39,7 +39,7 @@ from huesdk import Hue
 # the connect method will return a username
 username = Hue.connect(bridge_ip=YOUR_BRIDGE_IP)
 
-# You can now create an instance of the Hus class, 
+# You can now create an instance of the Hue class, 
 # next you won't need to press the button
 hue = Hue(bridge_ip=YOUR_BRIDGE_IP, username=YOUR_USERNAME)
 
