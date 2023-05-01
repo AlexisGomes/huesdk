@@ -3,6 +3,10 @@ import requests
 from huesdk.light import Light
 from huesdk.group import Group
 from huesdk.schedule import Schedule
+import urllib3 # Need to import this module to disable the insecure connection warning
+
+# Disables the annoying insecure connection warning when using hue.get_lights(), etc..
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class Hue:
