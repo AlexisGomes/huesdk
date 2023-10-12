@@ -4,3 +4,4 @@ dist/
 huesdk.egg-info/
 .DS_Store
 .idea/
+venv/
