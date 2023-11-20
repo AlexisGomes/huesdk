@@ -37,7 +37,21 @@ class Discover:
         bridges = []
         for bridge in mdns_bridges:
             bridge_id = bridge.server.split(".")[0]
-            bridge_ip = socket.gethostbyname(bridge.server)
+            
+            # Attempt to resolve IP with different formats
+            formats_to_try = [
+                bridge.server,                   # Original server name
+                bridge.server.rstrip('.'),       # Remove trailing dot if exists
+                f"{bridge_id}.local"             # Append '.local' to the bridge ID
+            ]
+
+            for fmt in formats_to_try:
+                try:
+                    bridge_ip = socket.gethostbyname(fmt)
+                    break
+                except socket.gaierror:
+                    continue  # Try the next format if an error occurs
+                
             bridge_name = bridge.name.split(".")[0]
             bridge_info = {
                 "internalipaddress": bridge_ip,
