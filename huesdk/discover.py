@@ -34,6 +34,8 @@ class Discover:
         return json.dumps(result, indent=4)
 
     def find_hue_bridge_mdns(self, timeout=5):
+        global mdns_bridges
+        mdns_bridges = []
         zeroconf = Zeroconf()
         listener = mDNSListener()
         # search for bridges
